@@ -1,0 +1,23 @@
+/* Responsive Styles */
+@media (max-width: 768px) {
+    /* Main side bars */
+    #sidebar {
+        display: none;
+    }
+  
+    #main-content {
+        margin-left: 0;
+    }
+    /* form responsiveness */
+    .form-row {
+        flex-direction: column;
+    }
+  
+    .form-group {
+        margin-bottom: 15px;
+    }
+  
+    .form-group:last-child {
+        margin-bottom: 0;
+    }
+  }
