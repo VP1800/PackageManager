@@ -1,7 +1,47 @@
+<style>
+  /* Ensure all elements use border-box sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Header Styling */
+.header {
+    background-color: #f0f0f0; /* Light gray background */
+    padding: 0 20px;            /* Horizontal padding */
+    display: flex;              /* Enable Flexbox */
+    justify-content: center;    /* Center horizontally */
+    align-items: center;        /* Center vertically */
+    height: 60px;               /* Adjusted height to accommodate padding and font size */
+    width: 100%;                /* Ensure it spans full width */
+    border-radius: 10px;        /* Adjust the value for more or less curve */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for a 3D effect */
+}
+
+/* Header Title Styling */
+.header h1 {
+  margin: 0;                  /* Remove default margin */
+  font-size: 24px;            /* Font size */
+  text-align: center;         /* Center text */
+  line-height: 1;             /* Ensure line-height doesn't affect vertical centering */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+  .header {
+    height: 50px;             /* Reduce height on smaller screens */
+    padding: 0 10px;          /* Adjust padding */
+  }
+
+  .header h1 {
+    font-size: 20px;          /* Smaller font size */
+  }
+}
+
+</style>
 <div class="w3-card w3-padding w3-white">
-    <div class="w3-center">
+    <div class="header">
     <h1>Purchase</h1>
-  </div></br>
+  </div>
     <form id="purchaseForm">
     <div class="w3-row">
   <div class="w3-col s3  w3-padding">
