@@ -31,7 +31,7 @@ function loadPage(page) {
 //load page
 $(document).ready(function() {
     // Load the last visited page or default to index.html
-    var lastPage = localStorage.getItem('lastPage') || 'index.html';
+    var lastPage = localStorage.getItem('lastPage') || 'home.php';
     loadPage(lastPage);
     $(document).ajaxStart(function() {
     // console.log('AJAX start triggered');
