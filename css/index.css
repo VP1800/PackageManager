@@ -1,0 +1,129 @@
+/* Reset some default browser styles */
+body, h1, h2, h3, h4, h5, h6, p, ul {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+font-family: Arial, sans-serif;
+background-color: #f1f1f1;
+display: flex;
+flex-direction: column;
+justify-content: center;
+min-height: 100vh;
+}
+
+/* Main content area */
+.w3-main {
+flex: 1;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+/* Container for the login box */
+.w3-auto {
+width: 90%;
+max-width: 400px;
+background-color: #fff;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo styling */
+.w3-center img {
+max-width: 100px;
+margin-bottom: 20px;
+}
+
+/* Input field styling */
+.w3-input {
+width: 100%;
+padding: 12px;
+margin-bottom: 16px;
+border: 1px solid #ccc;
+border-radius: 4px;
+font-size: 16px;
+}
+
+/* Button styling */
+.w3-button {
+padding: 12px;
+font-size: 16px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+.w3-primary {
+background-color: #4CAF50;
+color: white;
+}
+
+.w3-primary:hover {
+background-color: #45a049;
+}
+
+/* Social media buttons */
+.bg-facebook {
+background-color: #3b5998;
+}
+
+.bg-twitter {
+background-color: #1da1f2;
+}
+
+.w3-text-white {
+color: white;
+}
+
+/* Footer styling */
+footer {
+position: fixed;
+bottom: 0;
+width: 100%;
+background-color: #fff;
+padding: 10px;
+text-align: center;
+border-top: 1px solid #ccc;
+}
+
+footer span {
+color: #888;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+.w3-auto {
+    width: 100%;
+    padding: 20px;
+    border-radius: 0;
+}
+
+.w3-button {
+    padding: 14px;
+    font-size: 18px;
+}
+
+.w3-input {
+    padding: 14px;
+    font-size: 18px;
+}
+}
+
+@media (max-width: 480px) {
+.w3-center img {
+    max-width: 80px;
+}
+
+.w3-primary {
+    font-size: 14px;
+}
+
+footer span {
+    font-size: 14px;
+}
+}
