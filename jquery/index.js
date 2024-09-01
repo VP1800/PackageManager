@@ -21,12 +21,8 @@ $(document).ready(function() {
         success: function(response) {
           if (response === 'success') {
             // Clear the localStorage
-            localStorage.clear();
-
-            // Optionally, you can set a specific page after clearing
-            localStorage.setItem('lastPage', 'home.php');
-
-            window.location.href = 'menu.php';
+            
+            window.location.href = 'home.php';
           } else {
             alert("Invalid username or password. Please try again.");
           }

@@ -1,16 +1,20 @@
-
-<div class="w3-card w3-padding w3-white">
-<div class="w3-center">
-   <h1>Unit</h1>
-  </div></br>
+<?php
+ require("header.php");
+?>
+<link rel="stylesheet" href="./css/addunit.css">
+<div id="main-content">
+<div class="p-card w3-padding w3-white">
+  <div class="header">
+<h1>Unit Form</h1>
+  </div>
     <form id="unitForm">
     <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group">
         <!-- <label for="unit">Unit</label> -->
         <input type="text" id="unit" class="unit" name="unit" placeholder="Enter unit">
         </div>
-        <div  class="form-group col-md-6">
-            <button type="submit" onclick="addunit(event)" class="w3-btn w3-blue">Add unit</button>
+        <div  class="form-group">
+            <button type="submit" onclick="addunit(event)" class="submit w3-btn w3-blue">Add unit</button>
         </div>
       </div>
     </form>
@@ -28,4 +32,10 @@
             </div>
     </div>
 </div>
+</div>
+<?php
+ require("./footer.php");
+?>
 <script type="text/javascript" src="./jquery/add_unit.js"></script>
+</body>
+</html>

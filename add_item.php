@@ -1,8 +1,12 @@
-
-<div class="w3-card w3-padding w3-white">
-<div class="w3-center">
+<?php
+ require("header.php");
+?>
+<link rel="stylesheet" href="./css/additem.css">
+<div id="main-content">
+<div class="p-card w3-padding w3-white">
+  <div class="header">
 <h1>Item Form</h1>
-  </div></br>
+  </div>
     <form id="itemForm">
     <div class="w3-row">
   <div class="w3-col s2  w3-padding">
@@ -10,6 +14,7 @@
     <select class="w3-input w3-border" id="category">
         <option value="" disabled selected>Choose Category</option>
         <option value="1">RM</option>
+        <option value="4">RM-paper</option>
         <option value="2">Semi Finished</option>
         <option value="3">FG</option>
     </select>
@@ -47,4 +52,8 @@
             </div>
     </div>
 </div>
+</div>
+<?php
+ require("./footer.php");
+?>
 <script type="text/javascript" src="./jquery/add_item.js"></script>

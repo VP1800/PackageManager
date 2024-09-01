@@ -1,3 +1,7 @@
+<?php
+ require("header.php");
+?>
+<div id="main-content">
 <div class="w3-card w3-padding w3-white">
     <div class="w3-center">
         <h1>Issue Tracking</h1>
@@ -89,4 +93,10 @@
         </tbody>
     </table>
 </div>
+</div>
+<?php
+ require("./footer.php");
+?>
 <script type="module" src="./jquery/issue_tracking.js"></script>
+</body>
+</html>

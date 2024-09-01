@@ -1,0 +1,116 @@
+/* Ensure all elements use border-box sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Card Container */
+.p-card {
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 100%; /* Ensure it does not exceed viewport width */
+}
+
+/* Header Styling */
+.header {
+  background-color: #f0f0f0; /* Light gray background */
+  padding: 10px 20px;        /* Padding around the content */
+  display: flex;             /* Enable Flexbox */
+  justify-content: space-between; /* Space out items */
+  align-items: center;       /* Center items vertically */
+  height: 60px;              /* Adjusted height */
+  width: 100%;               /* Ensure it spans full width */
+  border-radius: 10px;       /* Slight curve */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Header Title Styling */
+.header h1 {
+  margin: 0;                 /* Remove default margin */
+  font-size: 24px;           /* Font size */
+  text-align: left;          /* Align text to the left */
+  line-height: 1;            /* Ensure line-height doesn't affect vertical centering */
+  flex: 1;                   /* Allow h1 to take available space */
+}
+
+/* Form and Button Styling */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .form-group {
+    flex: 1;
+    margin: 5px; /* Add some margin for spacing */
+  }
+  
+  .unit {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box; /* Ensures padding doesn't affect the width */
+  }
+  
+  .submit {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column; /* Stack items on smaller screens */
+      height: auto;           /* Let height adjust based on content */
+      align-items: flex-start; /* Align items to start */
+    }
+  
+    .header h1 {
+      margin-bottom: 10px; /* Add margin to the bottom */
+      text-align: center; /* Center align on small screens */
+    }
+  
+    .header form {
+      margin-left: 0;       /* Reset margin */
+      width: 100%;          /* Full width for the form */
+      justify-content: space-between; /* Adjust form items spacing */
+    }
+    .form-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    .header input[type="text"], 
+    .submit {
+      width: 100%; /* Full width for form elements */
+      margin: 5px 0; /* Add margin for spacing */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .header {
+      padding: 10px; /* Adjust padding on smaller screens */
+    }
+  
+    .header h1 {
+      font-size: 20px; /* Smaller font size */
+    }
+  
+    .header form {
+      flex-direction: column; /* Stack form elements */
+      width: 100%;
+    }
+  
+    .header input[type="text"], 
+    .submit {
+      width: 100%; /* Full width for form elements */
+      margin: 5px 0; /* Add margin for spacing */
+    }
+  }
+  

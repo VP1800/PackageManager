@@ -10,17 +10,44 @@ body {
     z-index: 1000;
 }
 
-#main-content {
-    margin-top: 50px; /* Space for the top bar */
+/* #main-content {
+    margin-top: 50px;
     transition: margin-left 0.3s;
+} 
+#sidebar {
+  width: 250px;
+  display: block;
+  transition: display 0.3s;
+} */
+
+
+#main-content {
+  margin-left: 0; /* Remove left margin */
+      width: 100%;
+  margin-top: 60px; /* Space for the top bar */
+  margin-left: 250px; /* Adjust this to the sidebar's width */
+  transition: margin-left 0.3s;
 }
 
 #sidebar {
-    width: 250px;
-    display: block;
-    transition: display 0.3s;
+  width: 250px;
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 60px; /* Align with top bar */
+  height: 100%;
+  z-index: 1000;
+  background-color: #f4f4f4;
+  transition: transform 0.3s ease;
 }
 
+#sidebar.hidden {
+  transform: translateX(-250px); /* Hide the sidebar */
+}
+
+#main-content.full-width {
+  margin-left: 0; /* Full width when sidebar is hidden */
+}
 table.dataTable {
     width: 100% !important;
 }

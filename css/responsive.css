@@ -2,12 +2,13 @@
 @media (max-width: 768px) {
     /* Main side bars */
     #sidebar {
-        display: none;
-    }
-  
-    #main-content {
-        margin-left: 0;
-    }
+      display: none; /* Hide sidebar */
+  }
+
+  #main-content {
+      margin-left: 0; /* Remove left margin */
+      width: 100%; /* Make main content occupy full width */
+  }
     /* form responsiveness */
     .form-row {
         flex-direction: column;
@@ -19,5 +20,20 @@
   
     .form-group:last-child {
         margin-bottom: 0;
+    }
+  }
+  /* Responsive Adjustments */
+  @media (max-width: 480px) {
+    #main-content {
+      margin-left: 0; /* Remove left margin */
+      width: 100%; /* Make main content occupy full width */
+  }
+    .header {
+      height: 50px;             /* Reduce height on smaller screens */
+      padding: 0 10px;          /* Adjust padding */
+    }
+  
+    .header h1 {
+      font-size: 20px;          /* Smaller font size */
     }
   }

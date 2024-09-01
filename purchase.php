@@ -1,45 +1,10 @@
-<style>
-  /* Ensure all elements use border-box sizing */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-/* Header Styling */
-.header {
-    background-color: #f0f0f0; /* Light gray background */
-    padding: 0 20px;            /* Horizontal padding */
-    display: flex;              /* Enable Flexbox */
-    justify-content: center;    /* Center horizontally */
-    align-items: center;        /* Center vertically */
-    height: 60px;               /* Adjusted height to accommodate padding and font size */
-    width: 100%;                /* Ensure it spans full width */
-    border-radius: 10px;        /* Adjust the value for more or less curve */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for a 3D effect */
-}
-
-/* Header Title Styling */
-.header h1 {
-  margin: 0;                  /* Remove default margin */
-  font-size: 24px;            /* Font size */
-  text-align: center;         /* Center text */
-  line-height: 1;             /* Ensure line-height doesn't affect vertical centering */
-}
-
-/* Responsive Adjustments */
-@media (max-width: 480px) {
-  .header {
-    height: 50px;             /* Reduce height on smaller screens */
-    padding: 0 10px;          /* Adjust padding */
-  }
-
-  .header h1 {
-    font-size: 20px;          /* Smaller font size */
-  }
-}
-
-</style>
-<div class="w3-card w3-padding w3-white">
-    <div class="header">
+<?php
+ require("header.php");
+?>
+<link rel="stylesheet" href="./css/purchase.css">
+<div id="main-content">
+<div class="p-card w3-padding w3-white">
+  <div class="header">
     <h1>Purchase</h1>
   </div>
     <form id="purchaseForm">
@@ -129,105 +94,46 @@
 </div>
 
 <div class="w3-card w3-padding w3-white w3-margin-top">
-    <h3>Data Table</h3>
-    <table id="example" class="display responsive nowrap" style="width:100%">
-        <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Particulars</th>
-                            <th>Qty</th>
-                            <th>Rate</th>
-                            <th>Unit</th>
-                            <th>Taxable</th>
-                            <th>GST %</th>
-                            <th>GST</th>
-                            <th>Total</th>
-                            <th class="action-column">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input type="text" class="w3-input" name="item[]"></td>
-                            <td><input type="text" class="w3-input" name="particulars[]"></td>
-                            <td><input type="number" class="w3-input" name="qty[]" onchange="calculateTotals()"></td>
-                            <td><input type="number" class="w3-input" name="rate[]" onchange="calculateTotals()"></td>
-                            <td><input type="text" class="w3-input" name="unit[]"></td>
-                            <td><input type="number" class="w3-input" name="taxable[]" onchange="calculateTotals()"></td>
-                            <td><input type="number" class="w3-input" name="gst-percentage[]" onchange="calculateTotals()"></td>
-                            <td><input type="number" class="w3-input" name="gst[]" onchange="calculateTotals()"></td>
-                            <td><input type="number" class="w3-input" name="total[]" readonly></td>
-                            <td><span class="button-container">
-    <button type="button" class="w3-btn w3-red remove-row">-</button>
-    <button type="button" class="w3-btn w3-green add-row">+</button>
-  </span></td>
-                        </tr>
-                        <!-- More rows will be added here dynamically -->
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="2">Total</th>
-                            <th><input type="number" class="w3-input" id="total-qty" readonly></th>
-                            <th></th>
-                            <th></th>
-                            <th><input type="number" class="w3-input" id="total-taxable" readonly></th>
-                            <th></th>
-                            <th><input type="number" class="w3-input" id="total-gst" readonly></th>
-                            <th><input type="number" class="w3-input" id="grand-total" readonly></th>
-                            <th></th>
-                        </tr>
-                    </tfoot>
-            </table>
-            <table class="w3-table w3-bordered w3-hide">
-                <thead>
-                    <tr>
-                        <th colspan="1">Item</th>
-                        <th>Rate</th>
-                        <th>Taxable</th>
-                        <th>GST %</th>
-                        <th>GST</th>
-                        <th>Net</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <tr class="w3-hide">
-                        <td colspan="1">
-                            <select class="w3-input" id="item">
-                                <option value="item1">Item 1</option>
-                                <option value="item2">Item 2</option>
-                                <option value="item3">Item 3</option>
-                                <!-- Add more items as needed -->
-                            </select>
-                        </td>
-                        <td><input type="number" class="w3-input w3-border" id="rate"></td>
-                        <td><input type="number" class="w3-input w3-border" id="taxable"></td>
-                        <td><input type="number" class="w3-input w3-border" id="gst-percentage"></td>
-                        <td><input type="number" class="w3-input w3-border" id="gst"></td>
-                        <td><input type="number" class="w3-input w3-border" id="net"></td>
-                        <td><button href="#" class="w3-text-grey w3-hover-text-white w3-center w3-hover-blue w3-button" id="add_button" onclick=""><i class="fa fa-plus fa-fc" title="Add"></i></button></td>
-                </tr>
-                <tr class="w3-hide">
-                        <td></td>
-                        <td><input type="number" class="w3-input w3-border" id="totaltaxable"></td>
-                        <td></td>
-                        <td></td>
-                        <td><input type="number" class="w3-input w3-border" id="totalgst"></td>
-                        <td><input type="number" class="w3-input w3-border" id="totalnet"></td>
-                        <td></td>
-                </tr>
-                    <!-- Add more rows as needed -->
-                </tbody>
-                <tfoot>
-                        <tr>
-                            <th colspan="2">Total</th>
-                            <th><input type="number" class="w3-input" id="total-taxable" readonly></th>
-                            <th></th>
-                            <th><input type="number" class="w3-input" id="total-gst" readonly></th>
-                            <th><input type="number" class="w3-input" id="grand-total" readonly></th>
-                            <th></th>
-                        </tr>
-                    </tfoot>
-            </table>
-    </table>
+  <div class="w3-center">  
+  <h3>Pert List</h3>
+  </div>
+  <table id="purchase-table" class="display responsive nowrap" style="width:100%">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Qty</th>
+      <th>Rate</th>
+      <th>Unit</th>
+      <th>Taxable</th>
+      <th>GST %</th>
+      <th>GST</th>
+      <th>Total</th>
+      <th class="action-column">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th colspan="2">Total</th>
+      <th><input type="number" class="w3-input" id="total-qty" readonly></th>
+      <th></th>
+      <th><input type="number" class="w3-input" id="total-taxable" readonly></th>
+      <th></th>
+      <th><input type="number" class="w3-input" id="total-gst" readonly></th>
+      <th><input type="number" class="w3-input" id="grand-total" readonly></th>
+      <th><span class="button-container">
+        <!-- <button type="button" class="w3-btn w3-red remove-row">-</button> -->
+        <button type="button" class="w3-btn w3-green add-row">+</button>
+      </span>
+      </th>
+    </tr>
+    <!-- More rows will be added here dynamically -->
+  </tbody>
+</table>
 </div>
-<script src="./jquery/purchase.js"></script>
+</div>
+<?php
+ require("./footer.php");
+?>
+<script type="text/javascript" src="./jquery/purchase.js"></script>
+</body>
+</html>

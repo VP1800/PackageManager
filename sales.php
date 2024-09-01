@@ -1,8 +1,12 @@
-<div class="w3-card w3-padding w3-white">
-    <div class="w3-center">
-        <h2>Sales</h2>
-    </div>
-    <form>
+<?php
+ require("header.php");
+?>
+<link rel="stylesheet" href="./css/sales.css">
+<div id="main-content">
+<div class="p-card w3-padding w3-white">
+  <div class="header">
+    <h1>Sales</h1>
+  </div>
         <!-- Sale Section -->
         <div class="w3-row-padding">
             <div class="w3-col s6">
@@ -39,7 +43,8 @@
                 <input type="text" class="w3-input" id="remarks">
             </div>
         </div>
-
+</div>
+<div class="w3-card w3-padding w3-white">
         <!-- Table Section -->
         <table class="w3-table w3-bordered" id="sales-table">
             <thead>
@@ -90,4 +95,10 @@
         <button type="submit" class="w3-btn w3-blue">Submit</button>
     </form>
 </div>
-<script src="./jquery/sales.js"></script>
+</div>
+<?php
+ require("./footer.php");
+?>
+<script type="text/javascript" src="./jquery/sales.js"></script>
+</body>
+</html>

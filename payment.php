@@ -1,3 +1,7 @@
+<?php
+ require("header.php");
+?>
+<div id="main-content">
 <div class="w3-card w3-padding w3-white">
 <div class="w3-center">
         <h1>Separate Payment Receipt</h1>
@@ -55,4 +59,10 @@
         </div>
     </div>
 </div>
+</div>
+<?php
+ require("./footer.php");
+?>
 <script src="./jquery/payment.js"></script>
+</body>
+</html>

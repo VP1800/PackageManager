@@ -75,6 +75,7 @@ foreach ($unittablelist as $unit) {
                 <tbody>';
                 $categoryMap = [
                     1 => 'RM',
+                    4 => 'RM-paper',
                     2 => 'Semi Finished',
                     3 => 'FG'
                 ];
@@ -90,6 +91,7 @@ foreach ($unittablelist as $unit) {
                     $output = $output.'<span id="item_category_span' . $item_data_row['item_id'] . '">' . $categoryMap[$item_data_row['item_category']] . '</span>
                                 <select id="item_category_input' . $item_data_row['item_id'] . '"  style="display: none;">
                                     <option value="1" ' . (($item_data_row['item_category'] == 1) ? 'selected' : '') . '>RM</option>
+                                    <option value="4" ' . (($item_data_row['item_category'] == 4) ? 'selected' : '') . '>RM-paper</option>
                                     <option value="2" ' . (($item_data_row['item_category'] == 2) ? 'selected' : '') . '>Semi Finished</option>
                                     <option value="3" ' . (($item_data_row['item_category'] == 3) ? 'selected' : '') . '>FG</option>
                                 </select>';

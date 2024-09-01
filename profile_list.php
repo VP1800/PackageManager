@@ -1,4 +1,9 @@
-<div class="w3-card w3-padding w3-white w3-margin-top">
+<?php
+ require("header.php");
+?>
+<link rel="stylesheet" href="./css/profile.css">
+<div id="main-content">
+<div class="p-card w3-padding w3-white">
     <div class="header">
    <h1>Profile list</h1>
   </div>
@@ -11,4 +16,10 @@
             </div>
     </div>
 </div>
+</div>
+<?php
+ require("./footer.php");
+?>
 <script type="text/javascript" src="./jquery/profile_list.js"></script>
+</body>
+</html>

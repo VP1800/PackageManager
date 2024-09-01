@@ -1,7 +1,12 @@
-<div class="w3-card w3-padding w3-white">
-<div class="w3-center">
-   <h1>Sheet Weight Form</h1>
-  </div></br>
+<?php
+ require("header.php");
+?>
+<link rel="stylesheet" href="./css/purchase.css">
+<div id="main-content">
+<div class="p-card w3-padding w3-white">
+  <div class="header">
+    <h1>Sheet Weight</h1>
+  </div>
     <form id="sheetWeightForm">
     <div class="w3-row">
   <div class="w3-col s3  w3-padding">
@@ -35,4 +40,10 @@
             </div>
     </div>
 </div>
+</div>
+<?php
+ require("./footer.php");
+?>
 <script type="text/javascript" src="./jquery/sheetweightform.js"></script>
+</body>
+</html>

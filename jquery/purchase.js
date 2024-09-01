@@ -1,3 +1,4 @@
+/*
 // keypress
 $('#plocation').blur(function() {
     if ($(this).val() === null) {
@@ -438,58 +439,80 @@ $(document).ready(function() {
                 });
     }
 });
-
+*/
 
 //check
 $(document).ready(function() {
     $(document).on('click', '.add-row', function() {
-        var newRow = `<tr>
-            <td><input type="text" class="w3-input" name="item[]"></td>
-            <td><input type="text" class="w3-input" name="particulars[]"></td>
-            <td><input type="number" class="w3-input" name="qty[]" onchange="calculateTotals()"></td>
-            <td><input type="number" class="w3-input" name="rate[]" onchange="calculateTotals()"></td>
-            <td><input type="text" class="w3-input" name="unit[]"></td>
-            <td><input type="number" class="w3-input" name="taxable[]" onchange="calculateTotals()"></td>
-            <td><input type="number" class="w3-input" name="gst-percentage[]" onchange="calculateTotals()"></td>
-            <td><input type="number" class="w3-input" name="gst[]" onchange="calculateTotals()"></td>
-            <td><input type="number" class="w3-input" name="total[]" readonly></td>
-            <td><button type="button" class="w3-btn w3-red remove-row">-</button>
-            <button type="button" class="w3-btn w3-green add-row">+</button></td>
-        </tr>`;
-        $('#sales-table tbody').append(newRow);
+      var newRow = `<tr>
+        <td>
+          <select class="w3-input" name="item[]">
+            <option value="">Select Item</option>
+            <!-- Add options here -->
+          </select>
+        </td>
+        <td><input type="number" class="w3-input" name="qty[]" onchange="calculateTotals()"></td>
+        <td><input type="number" class="w3-input" name="rate[]" onchange="calculateTotals()"></td>
+        <td>
+          <select class="w3-input" name="unit[]">
+            <option value="">Select Unit</option>
+            <!-- Add options here -->
+          </select>
+        </td>
+        <td><input type="number" class="w3-input" name="taxable[]" readonly></td>
+        <td><input type="number" class="w3-input" name="gst-percentage[]" onchange="calculateTotals()"></td>
+        <td><input type="number" class="w3-input" name="gst[]" readonly></td>
+        <td><input type="number" class="w3-input" name="total[]" readonly></td>
+        <td><span class="button-container">
+              <button type="button" class="w3-btn w3-red remove-row" style="font-size: 12px; padding: 4px 8px;">-</button>
+                <a href="#" class="update-row" title="Update"><i class="fa fa-pencil" style="font-size: 12px;"></i></a>
+            </span>
+        </td>
+      </tr>`;
+      $('#purchase-table tbody tr:first').after(newRow);
     });
-
+  
     $(document).on('click', '.remove-row', function() {
+      if ($('#purchase-table tbody tr').length > 2) {
         $(this).closest('tr').remove();
         calculateTotals();
+      }
     });
-});
-
-function calculateTotals() {
-    let totalQty = 0;
-    let totalTaxable = 0;
-    let totalGST = 0;
-    let grandTotal = 0;
-
-    $('#sales-table tbody tr').each(function() {
+  
+    $(document).on('click', '.update-row', function() {
+      // Update row logic here
+    });
+  
+    function calculateTotals() {
+      let totalQty = 0;
+      let totalTaxable = 0;
+      let totalGST = 0;
+      let grandTotal = 0;
+  
+      $('#purchase-table tbody tr:not(:first)').each(function() {
         const qty = parseFloat($(this).find('input[name="qty[]"]').val()) || 0;
         const rate = parseFloat($(this).find('input[name="rate[]"]').val()) || 0;
-        const taxable = parseFloat($(this).find('input[name="taxable[]"]').val()) || 0;
+        const taxable = qty * rate;
         const gstPercentage = parseFloat($(this).find('input[name="gst-percentage[]"]').val()) || 0;
-        const gst = parseFloat($(this).find('input[name="gst[]"]').val()) || 0;
-
+        const gst = (taxable / 100) * gstPercentage;
         const total = taxable + gst;
-
+  
+        $(this).find('input[name="taxable[]"]').val(taxable.toFixed(2));
+        $(this).find('input[name="gst[]"]').val(gst.toFixed(2));
         $(this).find('input[name="total[]"]').val(total.toFixed(2));
-
+  
         totalQty += qty;
         totalTaxable += taxable;
         totalGST += gst;
         grandTotal += total;
-    });
-
-    $('#total-qty').val(totalQty.toFixed(2));
-    $('#total-taxable').val(totalTaxable.toFixed(2));
-    $('#total-gst').val(totalGST.toFixed(2));
-    $('#grand-total').val(grandTotal.toFixed(2));
-}
+      });
+  
+      $('#total-qty').val(totalQty.toFixed(2));
+      $('#total-taxable').val(totalTaxable.toFixed(2));
+      $('#total-gst').val(totalGST.toFixed(2));
+      $('#grand-total').val(grandTotal.toFixed(2));
+    }
+  
+    // Call calculateTotals() when the page loads
+    calculateTotals();
+  });

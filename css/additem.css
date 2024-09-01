@@ -1,0 +1,109 @@
+/* Ensure all elements use border-box sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Header Styling */
+.header {
+  background-color: #f0f0f0; /* Light gray background */
+  padding: 0 20px;            /* Horizontal padding */
+  display: flex;              /* Enable Flexbox */
+  justify-content: center;    /* Center horizontally */
+  align-items: center;        /* Center vertically */
+  height: 60px;               /* Adjusted height to accommodate padding and font size */
+  width: 100%;                /* Ensure it spans full width */
+  border-radius: 10px;        /* Adjust the value for more or less curve */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for a 3D effect */
+}
+
+/* Header Title Styling */
+.header h1 {
+  margin: 0;                  /* Remove default margin */
+  font-size: 24px;            /* Font size */
+  text-align: center;         /* Center text */
+  line-height: 1;             /* Ensure line-height doesn't affect vertical centering */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+  .header {
+    height: 50px;             /* Reduce height on smaller screens */
+    padding: 0 10px;          /* Adjust padding */
+  }
+
+  .header h1 {
+    font-size: 20px;          /* Smaller font size */
+  }
+}
+
+.p-card {
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 100%; /* Ensure it does not exceed viewport width */
+}
+
+/* Responsive Form Layout */
+.w3-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10px;
+}
+
+.w3-col {
+  padding: 10px;
+  flex: 1 1 100%; /* Allow columns to flex and take full width */
+}
+
+.w3-col.s2 {
+  flex: 1 1 20%; /* Make s2 columns take 20% width */
+}
+
+.w3-col.s3 {
+  flex: 1 1 25%; /* Make s3 columns take 25% width */
+}
+
+.w3-col.s6 {
+  flex: 1 1 50%; /* Make s6 columns take 50% width */
+}
+
+.w3-col input,
+.w3-col select {
+  width: 100%; /* Ensure inputs and selects take full width of their container */
+}
+
+/* Submit Button Styling */
+.w3-btn.w3-blue {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Responsive Adjustments for Form */
+@media (max-width: 1136px) {
+  .w3-col.s2,
+  .w3-col.s3,
+  .w3-col.s6 {
+    flex: 1 1 100%; /* Stack columns on top of each other */
+  }
+  
+  .w3-btn.w3-blue {
+    margin-top: 20px;
+  }
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+tfoot input {
+  width: 100%;
+}
