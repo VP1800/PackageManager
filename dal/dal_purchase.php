@@ -168,4 +168,32 @@ foreach ($unittablelist as $unit) {
               mysqli_close($con);
               exit();
 }
+
+//list itemand unit
+if (isset($_POST['list_item_and_unit'])) {
+    $datatablelist = get_data("i.item_id,i.item_category,i.item_name,u.unit_id,u.unit_name","tbl_item i INNER JOIN tbl_unit u ON i.unit_id = u.unit_id");
+    $datatablerowid = 0;
+    if(isset($datatablelist)){
+        $output='<option value="" disabled selected>Choose item</option>';
+        while($item_data_row = mysqli_fetch_array($datatablelist)){
+            $output =$output.'<option value="'. $item_data_row['item_id'] .'" data-unit-id="'. $item_data_row['item_category'] .'" data-unit-id="'. $item_data_row['unit_id'] .'" data-unit-name="'. $item_data_row['unit_name'] .'">' . $item_data_row['item_name'] .'</option>';
+        }  
+    }
+    echo $output;
+    mysqli_close($con);
+    exit();
+}
+
+//add row
+if (isset($_POST['add_purchase_pert'])) {
+    $adduserdate=date('y/m/d h:m:s');
+    mysqli_query($con, "set @p_purchase_id=0");
+    $item_result = mysqli_query($con,"CALL purchase(@p_item_id,$_POST[category],'$_POST[name]','$_POST[hsn]',$_POST[unit],1,1,1,'$adduserdate',1)");
+    // echo "set set @p_item_id=0;CALL sheet_weight(@p_item_id,'$_POST[length]','$_POST[width]','$_POST[gsm]',0,1,1,1,'$adduserdate',1)";
+    $item_list = mysqli_query($con,"SELECT @p_item_id");
+    $item_row = mysqli_fetch_assoc($item_list);
+    echo $item_row['@p_item_id'];
+    mysqli_close($con);
+    exit();
+}
 ?>

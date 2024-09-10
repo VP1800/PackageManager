@@ -1,5 +1,6 @@
 body {
     font-family: Arial, sans-serif;
+    width: 100%;
 }
 
 .top-bar {
@@ -21,14 +22,7 @@ body {
 } */
 
 
-#main-content {
-  margin-left: 0; /* Remove left margin */
-      width: 100%;
-  margin-top: 60px; /* Space for the top bar */
-  margin-left: 250px; /* Adjust this to the sidebar's width */
-  transition: margin-left 0.3s;
-}
-
+/* Sidebar styles */
 #sidebar {
   width: 250px;
   display: block;
@@ -41,13 +35,24 @@ body {
   transition: transform 0.3s ease;
 }
 
+/* Sidebar hidden state */
 #sidebar.hidden {
   transform: translateX(-250px); /* Hide the sidebar */
 }
 
+/* Main content styles */
+#main-content {
+  margin-left: 250px; /* Adjust to the sidebar's width */
+  width: calc(100% - 250px); /* Ensure main content fits next to the sidebar */
+  margin-top: 60px; /* Space for the top bar */
+  transition: margin-left 0.3s, width 0.3s; /* Smooth transitions */
+}
+
 #main-content.full-width {
   margin-left: 0; /* Full width when sidebar is hidden */
+  width: 100%; /* Main content takes full width */
 }
+
 table.dataTable {
     width: 100% !important;
 }

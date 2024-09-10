@@ -113,9 +113,9 @@
   </thead>
   <tbody>
     <tr>
-      <th colspan="2">Total</th>
+      <th>Total</th>
       <th><input type="number" class="w3-input" id="total-qty" readonly></th>
-      <th></th>
+      <th colspan="2"></th>
       <th><input type="number" class="w3-input" id="total-taxable" readonly></th>
       <th></th>
       <th><input type="number" class="w3-input" id="total-gst" readonly></th>
@@ -125,6 +125,11 @@
         <button type="button" class="w3-btn w3-green add-row">+</button>
       </span>
       </th>
+    </tr>
+    <tr class="w3-hide">
+        <td colspan="9"><select class="w3-input" id="item" name="item" class="item">
+            <!-- Add options here -->
+          </select></td>
     </tr>
     <!-- More rows will be added here dynamically -->
   </tbody>

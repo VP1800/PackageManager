@@ -1,4 +1,3 @@
-/*
 // keypress
 $('#plocation').blur(function() {
     if ($(this).val() === null) {
@@ -439,80 +438,169 @@ $(document).ready(function() {
                 });
     }
 });
-*/
 
 //check
 $(document).ready(function() {
-    $(document).on('click', '.add-row', function() {
-      var newRow = `<tr>
-        <td>
-          <select class="w3-input" name="item[]">
-            <option value="">Select Item</option>
-            <!-- Add options here -->
-          </select>
-        </td>
-        <td><input type="number" class="w3-input" name="qty[]" onchange="calculateTotals()"></td>
-        <td><input type="number" class="w3-input" name="rate[]" onchange="calculateTotals()"></td>
-        <td>
-          <select class="w3-input" name="unit[]">
-            <option value="">Select Unit</option>
-            <!-- Add options here -->
-          </select>
-        </td>
-        <td><input type="number" class="w3-input" name="taxable[]" readonly></td>
-        <td><input type="number" class="w3-input" name="gst-percentage[]" onchange="calculateTotals()"></td>
-        <td><input type="number" class="w3-input" name="gst[]" readonly></td>
-        <td><input type="number" class="w3-input" name="total[]" readonly></td>
-        <td><span class="button-container">
-              <button type="button" class="w3-btn w3-red remove-row" style="font-size: 12px; padding: 4px 8px;">-</button>
-                <a href="#" class="update-row" title="Update"><i class="fa fa-pencil" style="font-size: 12px;"></i></a>
-            </span>
-        </td>
-      </tr>`;
-      $('#purchase-table tbody tr:first').after(newRow);
-    });
-  
-    $(document).on('click', '.remove-row', function() {
-      if ($('#purchase-table tbody tr').length > 2) {
-        $(this).closest('tr').remove();
-        calculateTotals();
-      }
-    });
-  
-    $(document).on('click', '.update-row', function() {
-      // Update row logic here
-    });
-  
-    function calculateTotals() {
-      let totalQty = 0;
-      let totalTaxable = 0;
-      let totalGST = 0;
-      let grandTotal = 0;
-  
-      $('#purchase-table tbody tr:not(:first)').each(function() {
-        const qty = parseFloat($(this).find('input[name="qty[]"]').val()) || 0;
-        const rate = parseFloat($(this).find('input[name="rate[]"]').val()) || 0;
-        const taxable = qty * rate;
-        const gstPercentage = parseFloat($(this).find('input[name="gst-percentage[]"]').val()) || 0;
-        const gst = (taxable / 100) * gstPercentage;
-        const total = taxable + gst;
-  
-        $(this).find('input[name="taxable[]"]').val(taxable.toFixed(2));
-        $(this).find('input[name="gst[]"]').val(gst.toFixed(2));
-        $(this).find('input[name="total[]"]').val(total.toFixed(2));
-  
-        totalQty += qty;
-        totalTaxable += taxable;
-        totalGST += gst;
-        grandTotal += total;
-      });
-  
-      $('#total-qty').val(totalQty.toFixed(2));
-      $('#total-taxable').val(totalTaxable.toFixed(2));
-      $('#total-gst').val(totalGST.toFixed(2));
-      $('#grand-total').val(grandTotal.toFixed(2));
+    var itemsOptions = ''; // To store item options
+    
+    function list_item_and_unit() {
+        $.ajax({
+            type: 'post',
+            url: 'dal/dal_purchase.php',
+            data: {
+                list_item_and_unit: 'list_item_and_unit'
+            },
+            success: function(response) {
+                debugger;
+                if (response) {
+                    itemsOptions = response; // Store the item options
+                    $('#purchase-table tbody tr:first select[name="item[]"]').append(itemsOptions);
+                } else {
+                    showAlert('Failed to load item.', "danger");
+                }
+            }
+        });
     }
-  
+
+    list_item_and_unit(); // Load items when the page loads
+
+    $(document).on('change', '.item-select', function() {
+        var selectedOption = $(this).find('option:selected');
+        var itemId = selectedOption.val();
+        var unitField = $(this).closest('tr').find('.unit-input');
+        var unitList = $(this).closest('tr').find('datalist#unitList');
+        
+        $.ajax({
+            type: 'post',
+            url: 'dal/dal_table.php',
+            data: {
+                get_units: 'get_units',
+                item_id: itemId
+            },
+            success: function(response) {
+                debugger;
+                if (response) {
+                    unitList.html(response); // Update the unit list based on the selected item
+                    unitField.attr('placeholder', 'Select or enter unit');
+                } else {
+                    showAlert('Failed to load units.', "danger");
+                }
+            }
+        });
+    });
+
+    $(document).on('click', '.add-row', function() {
+        var newRow = `<tr>
+            <td>
+                <select class="w3-input item-select" name="item[]">
+                    ${itemsOptions} <!-- Reuse the loaded item options -->
+                </select>
+            </td>
+            <td><input type="number" class="w3-input qty-input" name="qty[]" onchange="calculateTotals()" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></td>
+            <td><input type="number" step="0.01" class="w3-input rate-input" name="rate[]" onchange="calculateTotals()" oninput="this.value = this.value.replace(/[^0-9.]/g, '')"></td>
+            <td>
+                <input type="text" class="w3-input unit-input" name="unit[]" list="unitList" placeholder="Select or enter unit">
+                <datalist id="unitList">
+                    <option value="">Select Unit</option>
+                </datalist>
+            </td>
+            <td><input type="number" class="w3-input" name="taxable[]" readonly></td>
+            <td><input type="number" step="0.01" class="w3-input gst-percentage-input" name="gst-percentage[]" onchange="calculateTotals()" oninput="this.value = this.value.replace(/[^0-9.]/g, '')"></td>
+            <td><input type="number" class="w3-input" name="gst[]" readonly></td>
+            <td><input type="number" class="w3-input" name="total[]" readonly></td>
+            <td><span class="button-container">
+                    <button type="button" class="w3-btn w3-red remove-row" style="font-size: 12px; padding: 4px 8px;">-</button>
+                    <a href="#" class="update-row" title="Update"><i class="fa fa-pencil" style="font-size: 12px;"></i></a>
+                </span>
+            </td>
+        </tr>`;
+        $('#purchase-table tbody tr:first').after(newRow);
+    });
+
+    $(document).on('click', '.remove-row', function() {
+        if ($('#purchase-table tbody tr').length > 2) {
+            $(this).closest('tr').remove();
+            calculateTotals();
+        }
+    });
+
+    $(document).on('click', '.update-row', function() {
+        var row = $(this).closest('tr');
+        var item = row.find('select[name="item[]"]').val();
+        var qty = row.find('input[name="qty[]"]').val();
+        var rate = row.find('input[name="rate[]"]').val();
+        var unit = row.find('input[name="unit[]"]').val();
+        var taxable = row.find('input[name="taxable[]"]').val();
+        var gstPercentage = row.find('input[name="gst-percentage[]"]').val();
+        var gst = row.find('input[name="gst[]"]').val();
+        var total = row.find('input[name="total[]"]').val();
+
+        // Perform validation
+        if (!item || !qty || !rate || !unit) {
+            alert('Please fill in all required fields.'+unit, "warning");
+            return;
+        }
+
+        // AJAX call to save the row data
+        $.ajax({
+            type: 'post',
+            url: 'dal/dal_purchase.php',
+            data: {
+                add_purchase_pert:'add_purchase_pert',
+                item: item,
+                qty: qty,
+                rate: rate,
+                unit: unit,
+                taxable: taxable,
+                gstPercentage: gstPercentage,
+                gst: gst,
+                total: total
+            },
+            success: function(response) {
+                if (response === 'success') {
+                    showAlert('Row updated successfully.', "success");
+                } else {
+                    showAlert('Failed to update row.', "danger");
+                }
+            }
+        });
+    });
+
+    function calculateTotals() {
+        let totalQty = 0;
+        let totalTaxable = 0;
+        let totalGST = 0;
+        let grandTotal = 0;
+
+        $('#purchase-table tbody tr:not(:first)').each(function() {
+            const qty = parseFloat($(this).find('input[name="qty[]"]').val()) || 0;
+            const rate = parseFloat($(this).find('input[name="rate[]"]').val()) || 0;
+            const taxable = qty * rate;
+            const gstPercentage = parseFloat($(this).find('input[name="gst-percentage[]"]').val()) || 0;
+            const gst = taxable * (gstPercentage / 100);
+            const total = taxable + gst;
+
+            $(this).find('input[name="taxable[]"]').val(taxable.toFixed(2));
+            $(this).find('input[name="gst[]"]').val(gst.toFixed(2));
+            $(this).find('input[name="total[]"]').val(total.toFixed(2));
+
+            totalQty += qty;
+            totalTaxable += taxable;
+            totalGST += gst;
+            grandTotal += total;
+        });
+
+        $('#total-qty').val(totalQty.toFixed(2));
+        $('#total-taxable').val(totalTaxable.toFixed(2));
+        $('#total-gst').val(totalGST.toFixed(2));
+        $('#grand-total').val(grandTotal.toFixed(2));
+    }
+
     // Call calculateTotals() when the page loads
     calculateTotals();
-  });
+
+    // Call calculateTotals() on input event
+    $(document).on('input', 'input[name="qty[]"], input[name="rate[]"], input[name="gst-percentage[]"]', function(event) {
+        calculateTotals();
+    });
+});
